@@ -5,7 +5,7 @@ class CustomText extends StatelessWidget {
     super.key,
     required this.text,
     this.color = Colors.white,
-    this.fontSize = 14,
+    this.fontSize = 10,
     this.fontWeight = FontWeight.normal,
   });
 
@@ -17,10 +17,13 @@ class CustomText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
       style: TextStyle(
         color: color,
         fontSize: fontSize,
         fontWeight: fontWeight,
+
       ),
     );
   }

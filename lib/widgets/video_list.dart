@@ -25,14 +25,14 @@ class VideoList extends StatelessWidget {
             children: [
               Image.network(vedio_Img),
               Positioned(
-                  bottom: 5,
-                  right: 10,
-                  child: Container(
-                    color: Colors.black12,
-                      padding: EdgeInsets.symmetric(horizontal: 5,vertical: 5),
-                      child: CustomText(text: "$time")
-                  )
-              )
+                bottom: 5,
+                right: 10,
+                child: Container(
+                  color: Colors.black12,
+                  padding: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
+                  child: CustomText(text: "$time"),
+                ),
+              ),
             ],
           ),
           SizedBox(height: 15),

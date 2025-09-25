@@ -32,6 +32,10 @@ class _VideoDetailsState extends State<VideoDetails> {
         String? videoUrl;
         if (jsonData.containsKey('streamUrl')) {
           videoUrl = jsonData['streamUrl']?.toString();
+        } else if (jsonData['audios'] is List && (jsonData['audios'] as List).isNotEmpty) {
+          // Prefer audio-only stream for background playback if available
+          final first = (jsonData['audios'] as List).first;
+          videoUrl = (first is Map<String, dynamic> ? first['url'] : null)?.toString();
         } else if (jsonData['formats'] is List && (jsonData['formats'] as List).isNotEmpty) {
           final first = (jsonData['formats'] as List).first;
           videoUrl = (first is Map<String, dynamic> ? first['url'] : null)?.toString();
@@ -51,6 +55,7 @@ class _VideoDetailsState extends State<VideoDetails> {
           return;
         }
 
+        // Use shared VideoPlayer controller so audio can continue when leaving the page
         await PlaybackManager.instance.playFromUrl(videoId: id, url: videoUrl);
         controller = PlaybackManager.instance.controller;
         if (!mounted) return;
@@ -79,7 +84,8 @@ class _VideoDetailsState extends State<VideoDetails> {
 
   @override
   void dispose() {
-    // Keep controller alive to continue audio in background
+    // إيقاف الصوت والتخلص من الكونترولر عند الخروج
+    PlaybackManager.instance.stopAndDispose();
     super.dispose();
   }
 

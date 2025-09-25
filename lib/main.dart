@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 
 import 'Screen/home.dart';
+// background audio removed
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 

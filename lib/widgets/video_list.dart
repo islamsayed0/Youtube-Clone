@@ -69,10 +69,9 @@ class VideoList extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   CustomText(text: title),
-                  CustomText(
-                    text: "$Channel_name        $views        $date",
-                    color: Colors.white70,
-                  ),
+              CustomText(text: Channel_name, color: Colors.white70),
+              CustomText(text: views, color: Colors.white70),
+              CustomText(text: date, color: Colors.white70),
                 ],
               ),
             ],

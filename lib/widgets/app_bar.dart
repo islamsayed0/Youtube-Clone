@@ -45,26 +45,30 @@ class App_Bar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 150,
-          height: 150,
-          child: Image.asset(logo),
+        SizedBox(
+          width: 120,
+          height: 56,
+          child: Image.asset(logo, fit: BoxFit.contain),
         ),
-        const SizedBox(width: 40),
+        const SizedBox(width: 12),
         Expanded(
-          child: TextFormField(
-            controller: controller,
-            decoration: InputDecoration(
-              suffixIcon: Icon(suffixIcon),
-              prefixIcon: Icon(prefixIcon),
-              hintText: "Enter your name",
-              border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                borderSide: BorderSide(color: Colors.white),
+          child: SizedBox(
+            height: 44,
+            child: TextFormField(
+              controller: controller,
+              decoration: InputDecoration(
+                suffixIcon: Icon(suffixIcon),
+                prefixIcon: Icon(prefixIcon),
+                hintText: "Search",
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 12),
               ),
+              onTap: ontap,
+              onFieldSubmitted: onsubmit,
             ),
-            onTap: ontap,
-            onFieldSubmitted: onsubmit,
           ),
         ),
       ],

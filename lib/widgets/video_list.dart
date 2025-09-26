@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:youtubeclone/widgets/custom_text.dart';
 
-/********************** VideoList (Class) ****************
- * Purpose     : A widget to display a YouTube-style video item.
- * Description : Shows a video thumbnail with its duration,
- *               channel avatar, title, channel name, views, and publish date.
- * Usage       : Use inside a ListView to show multiple videos, e.g.:
- *               VideoList(
- *                 vedio_Img: "video_url",
- *                 Chanel_img: "channel_avatar_url",
- *                 title: "Video Title",
- *                 views: "100K views",
- *                 date: "2 days ago",
- *                 Channel_name: "Channel Name",
- *                 time: "10:30",
- *               )
- * Author      : Islam Sayed
- *******************************************************/
+/// ******************** VideoList (Class) ****************
+/// Purpose     : A widget to display a YouTube-style video item.
+/// Description : Shows a video thumbnail with its duration,
+///               channel avatar, title, channel name, views, and publish date.
+/// Usage       : Use inside a ListView to show multiple videos, e.g.:
+///               VideoList(
+///                 vedio_Img: "video_url",
+///                 Chanel_img: "channel_avatar_url",
+///                 title: "Video Title",
+///                 views: "100K views",
+///                 date: "2 days ago",
+///                 Channel_name: "Channel Name",
+///                 time: "10:30",
+///               )
+/// Author      : Islam Sayed
+///*****************************************************
 class VideoList extends StatelessWidget {
   const VideoList({
     super.key,

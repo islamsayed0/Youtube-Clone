@@ -18,6 +18,14 @@ class _VideoDetailsState extends State<VideoDetails> {
   bool isLoading = true;
   String? errorMsg;
 
+  /// ******************** getvideo ****************
+  /// Purpose     : Fetch video details and prepare playback.
+  /// Description : Calls the API with the provided video ID,
+  ///               extracts the best available stream URL,
+  ///               and initializes playback using PlaybackManager.
+  /// Usage       : Automatically called in initState() when the widget loads.
+  /// Author      : Islam Sayed
+  ///*****************************************************
   Future<void> getvideo() async {
     try {
       final id = widget.vedio_ID;
@@ -33,7 +41,6 @@ class _VideoDetailsState extends State<VideoDetails> {
         if (jsonData.containsKey('streamUrl')) {
           videoUrl = jsonData['streamUrl']?.toString();
         } else if (jsonData['audios'] is List && (jsonData['audios'] as List).isNotEmpty) {
-          // Prefer audio-only stream for background playback if available
           final first = (jsonData['audios'] as List).first;
           videoUrl = (first is Map<String, dynamic> ? first['url'] : null)?.toString();
         } else if (jsonData['formats'] is List && (jsonData['formats'] as List).isNotEmpty) {
@@ -55,7 +62,6 @@ class _VideoDetailsState extends State<VideoDetails> {
           return;
         }
 
-        // Use shared VideoPlayer controller so audio can continue when leaving the page
         await PlaybackManager.instance.playFromUrl(videoId: id, url: videoUrl);
         controller = PlaybackManager.instance.controller;
         if (!mounted) return;
@@ -81,13 +87,12 @@ class _VideoDetailsState extends State<VideoDetails> {
     super.initState();
     getvideo();
   }
-
   @override
   void dispose() {
-    // إيقاف الصوت والتخلص من الكونترولر عند الخروج
     PlaybackManager.instance.stopAndDispose();
     super.dispose();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -96,13 +101,18 @@ class _VideoDetailsState extends State<VideoDetails> {
         toolbarHeight: 0,
       ),
       body: isLoading
-          ? const CircularProgressIndicator()
+          ? Center(child: const CircularProgressIndicator())
           : errorMsg != null
           ? Text(errorMsg!)
           : controller != null && controller!.value.isInitialized
           ? AspectRatio(
         aspectRatio: controller!.value.aspectRatio,
-        child: VideoPlayer(controller!),
+        child: Column(
+          children: [
+            Expanded(child: VideoPlayer(controller!)),
+          ],
+        ),
+
       )
           : const Text("Video not available"),
     );

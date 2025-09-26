@@ -15,8 +15,8 @@ import 'package:flutter/material.dart';
 ///   )
 /// Author      : Islam Sayed
 ///*****************************************************
-class App_Bar extends StatelessWidget {
-  App_Bar({
+class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({
     super.key,
     required this.logo,
     required this.suffixIcon,

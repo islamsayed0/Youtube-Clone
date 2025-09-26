@@ -20,16 +20,16 @@ import 'package:youtubeclone/widgets/custom_text.dart';
 class VideoList extends StatelessWidget {
   const VideoList({
     super.key,
-    required this.vedio_Img,
-    required this.Chanel_img,
+    required this.videoImg,
+    required this.channelImg,
     required this.title,
     required this.views,
     required this.date,
-    required this.Channel_name,
+    required this.channelName,
     required this.time,
   });
 
-  final String vedio_Img, Chanel_img, title, views, date, Channel_name, time;
+  final String videoImg, channelImg, title, views, date, channelName, time;
 
   /// ******************** build ****************
   /// Purpose     : Build the UI for a single video item.
@@ -47,14 +47,14 @@ class VideoList extends StatelessWidget {
         children: [
           Stack(
             children: [
-              Image.network(vedio_Img),
+              Image.network(videoImg),
               Positioned(
                 bottom: 5,
                 right: 10,
                 child: Container(
                   color: Colors.black12,
                   padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                  child: CustomText(text: "$time"),
+                  child: CustomText(text: time),
                 ),
               ),
             ],
@@ -63,13 +63,13 @@ class VideoList extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              CircleAvatar(backgroundImage: NetworkImage(Chanel_img)),
+              CircleAvatar(backgroundImage: NetworkImage(channelImg)),
               const SizedBox(width: 10),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomText(text: title),
-              CustomText(text: Channel_name, color: Colors.white70),
+                  CustomText(text: title,fontSize: 10,),
+              CustomText(text: channelName, color: Colors.white70),
               CustomText(text: views, color: Colors.white70),
               CustomText(text: date, color: Colors.white70),
                 ],

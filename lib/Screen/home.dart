@@ -5,7 +5,7 @@ import 'package:youtubeclone/widgets/video_list.dart';
 import 'package:http/http.dart' as http;
 import '../const/string.dart';
 import '../widgets/app_bar.dart';
-import 'Video_Details.dart';
+import 'video_details.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -46,8 +46,10 @@ class _HomeState extends State<Home> {
       setState(() {
         items = results;
       });
-    } catch (_) {
-      // Silently ignore for now; could show a SnackBar in future
+    } catch (e) {
+      if (!mounted) return;
+      setState(() {
+      });
     }
   }
 
@@ -91,7 +93,7 @@ class _HomeState extends State<Home> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: App_Bar(
+          title: CustomAppBar(
             controller: searchController,
             logo: 'assets/img/logo_app.png',
             prefixIcon: Icons.search,
@@ -121,7 +123,7 @@ class _HomeState extends State<Home> {
                       await Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => VideoDetails(vedio_ID: (item['id'] ?? '').toString()),
+                          builder: (context) => VideoDetails(videoId: (item['id'] ?? '').toString()),
                         ),
                       );
                       setState(() {
@@ -130,13 +132,13 @@ class _HomeState extends State<Home> {
                     },
                     child: VideoList(
                       title: (item['title'] ?? 'No title').toString(),
-                      Channel_name: (item['channel']?['name'] ?? 'Unknown Channel').toString(),
+                      channelName: (item['channel']?['name'] ?? 'Unknown Channel').toString(),
                       date: (item['publishedTimeText'] ?? 'Unknown date').toString(),
-                      vedio_Img: (item['thumbnails'] is List && item['thumbnails'].isNotEmpty)
+                      videoImg: (item['thumbnails'] is List && item['thumbnails'].isNotEmpty)
                           ? (item['thumbnails'][0]?['url'] ?? '').toString()
                           : 'https://via.placeholder.com/360x202.png?text=No+Thumbnail',
                       views: (item['viewCountText'] ?? '0 views').toString(),
-                      Chanel_img: (item['channel']?['avatar'] is List && (item['channel']?['avatar'] as List).isNotEmpty)
+                      channelImg: (item['channel']?['avatar'] is List && (item['channel']?['avatar'] as List).isNotEmpty)
                           ? (item['channel']?['avatar'][0]?['url'] ?? '').toString()
                           : 'https://via.placeholder.com/88.png?text=No+Image',
                       time: (item['lengthText'] ?? '0:00').toString(),

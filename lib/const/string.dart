@@ -1,7 +1,7 @@
 class ApiConfig {
   static const String baseUrl = 'https://youtube-media-downloader.p.rapidapi.com';
   static const Map<String, String> headers = {
-    'x-rapidapi-key': '8ea0407e23msh7a2701c99ca11a0p126878jsnb6c20d41b43d',
+    'x-rapidapi-key': 'c32aaa48ffmsh73e5c5c9533c9f6p1a0bf5jsnd6acd0c5f64c',
     'x-rapidapi-host': 'youtube-media-downloader.p.rapidapi.com'
   };
 }
